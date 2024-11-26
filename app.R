@@ -11,7 +11,7 @@ theme_set(theme_classic())
 # options(shiny.autoreload = FALSE)
 
 source(
-  here::here("functions.R")
+  here::here("R", "functions.R")
 )
 
 # START SHINY APP
