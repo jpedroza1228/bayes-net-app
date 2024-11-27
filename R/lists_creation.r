@@ -26,8 +26,8 @@ wl <- matrix(
     )
   )
 
-bl
-wl
+# bl
+# wl
 
 # write.table(bl, file = "blacklist_cars.txt", row.names = FALSE, col.names = FALSE)
 # write.table(wl, file = "whitelist_cars.txt", row.names = FALSE, col.names = FALSE)

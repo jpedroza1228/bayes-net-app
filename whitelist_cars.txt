@@ -1,4 +1,0 @@
-"am" "mpg_cat"
-"hp_cat" "disp_cat"
-"disp_cat" "qsec_cat"
-"hp_cat" "disp_cat"

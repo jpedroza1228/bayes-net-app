@@ -22,9 +22,10 @@ ui <- page_navbar(
   sidebar = sidebar(
     title = "Parameters to change for Bayes Net Structure, Model, & Network Score",
     width = 350,
-    fileInput("file", "Choose CSV File. Example dataset can be found at LINK", accept = c("text/csv", "text/comma-separated-values, .csv")),
-    fileInput("user_wl", "A matrix with desired edges. Referred to as a whitelist. EXAMPLE CAN BE SEEN AT LINK", accept = c("text", "text, .txt")),
-    fileInput("user_bl", "A matrix with unwanted edges. Referred to as a blacklist. EXAMPLE CAN BE SEEN AT LINK", accept = c("text", "text, .txt")),
+    "All analyses for the Bayes Net models can be found on the bnlearn website (https://www.bnlearn.com/).",
+    fileInput("file", "Choose CSV File. Example dataset can be found at https://github.com/jpedroza1228/bayes-net-app/blob/main/R/cat_cars.csv", accept = c("text/csv", "text/comma-separated-values, .csv")),
+    fileInput("user_wl", "A matrix with desired edges. Referred to as a whitelist. Example code can be found at https://github.com/jpedroza1228/bayes-net-app/blob/main/R/lists_creation.r", accept = c("text", "text, .txt")),
+    fileInput("user_bl", "A matrix with unwanted edges. Referred to as a blacklist. Example code can be found at https://github.com/jpedroza1228/bayes-net-app/blob/main/R/lists_creation.r", accept = c("text", "text, .txt")),
 
     textInput("event", "Include event of interest. Write out the event as: ({Variable of Interest} == '1'), (e.g., (carb == '4'))"),
     textInput("evidence", "Include conditions of evidence in prediction. Write out the evidence as: ({Variable of Interest} == '0'), (e.g., (cyl == '6' | cyl == '4') & (hp != 'high_hp'))"),
