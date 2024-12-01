@@ -1,5 +1,5 @@
-# Use Rocker Shiny as base image
-FROM rocker/shiny:latest
+# Use Rocker Shiny Verse as base image
+FROM rocker/shiny-verse:latest
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -8,34 +8,23 @@ RUN apt-get update && apt-get install -y \
     libcurl4-openssl-dev \
     libv8-dev \
     libgraphviz-dev \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Create app directory
+RUN mkdir -p /srv/shiny-server/
+
+# Copy application files to app directory
+COPY app.R /srv/shiny-server/app.R
+# COPY loan_data_only_cat.csv /srv/shiny-server/loan_data_only_cat.csv
+# COPY blacklist.txt /srv/shiny-server/blacklist.txt
+# COPY whitelist.txt /srv/shiny-server/whitelist.txt
 
 # Install required R packages
-RUN Rscript -e "install.packages(c( \
-    'shiny', \
-    'shinydashboard', \
-    'shinythemes', \
-    'shinymeta', \
-    'bslib', \
-    'tidyverse', \
-    'bnlearn', \
-    'Rgraphviz', \
-    'here' \
-  ), repos='https://cloud.r-project.org/')"
-
-# Copy your Shiny app into the container
-# Assumes your app.R and functions.R are in the ./app directory
-COPY ./app /srv/shiny-server/app
-
-# Change working directory
-WORKDIR /srv/shiny-server/app
-
-# Make Shiny the default app and ensure functions.R is sourced correctly
-ENV SHINY_APP_DIR="/srv/shiny-server/app"
+RUN Rscript -e "install.packages(c('BiocManager', 'shinydashboard', 'shinythemes', 'shinymeta', 'bslib', 'tidyverse', 'bnlearn', 'here'), repos='https://cloud.r-project.org/')"
+RUN Rscript -e "BiocManager::install('Rgraphviz')"
 
 # Expose the default Shiny port
 EXPOSE 3838
 
-# Run Shiny app
-CMD ["R", "-e", "shiny::runApp(appDir=getwd(), host='0.0.0.0', port=3838)"]
+# Run the Shiny app
+CMD ["R", "-e", "shiny::runApp('/srv/shiny-server', host='0.0.0.0', port=3838)"]
