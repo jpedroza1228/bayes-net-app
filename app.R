@@ -10,10 +10,6 @@ library(Rgraphviz)
 theme_set(theme_classic())
 # options(shiny.autoreload = FALSE)
 
-# source(
-#   here::here("R", "functions.R")
-# )
-
 sl_alg <- function(
   data,
   algorithm = c("hc", "tabu", "rsmax2", "mmhc", "h2pc"), 
